@@ -7,6 +7,7 @@ title: string
     tasks: TasksType[]
      FilterTasks: (id:string) => void
      ChangeFilter: (value: FilteredType) => void
+     AddTask: (title: string)=>void
 }
 
 export type TasksType = {
@@ -24,7 +25,7 @@ function TodoList(props: TodoListType) {
     <div>
         <div>
             <input/>
-            <button>+</button>
+            <button onClick={()=>{props.AddTask('')}}>+</button>
         </div>
         <ul>
             {props.tasks.map((t)=>{
