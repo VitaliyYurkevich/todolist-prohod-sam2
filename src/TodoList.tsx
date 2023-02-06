@@ -34,7 +34,10 @@ function TodoList(props: TodoListType) {
     }
 
     const addTask = () => {
-        props.addTask(newTasksTitle)
+        if(newTasksTitle.trim() === ''){
+            return
+        }
+        props.addTask(newTasksTitle.trim())
         setNewTasksTitle('')
     }
 
@@ -43,6 +46,8 @@ function TodoList(props: TodoListType) {
     const onCompletedClickHandler = () => props.ChangeFilter('completed')
 
     const onActiveClickHandler = () => props.ChangeFilter('active')
+
+
 
 
     return (
@@ -58,8 +63,9 @@ function TodoList(props: TodoListType) {
                 </div>
                 <ul>
                     {props.tasks.map((t) => {
-                        const onChangeHandler = () => {
-                            console.log(t.id + 'wts')
+                        const onClickHandler = () => props.removeTask(t.id)
+                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            props.changeStatus(t.id, e.currentTarget.checked)
                         }
                         return (
                             <li key={t.id}>
@@ -69,9 +75,7 @@ function TodoList(props: TodoListType) {
 
                                 />
                                 <span>{t.title}</span>
-                                <button onClick={(e) => {
-                                    props.removeTask(t.id)
-                                }}>x
+                                <button onClick={onClickHandler}>x
                                 </button>
                             </li>
                         )
