@@ -11,6 +11,7 @@ export type TodoListType = {
     ChangeFilter: (value: FilterValuesType) => void
     addTask: (title: string) => void
     changeStatus: (taskId: string, isDone: boolean) => void
+    filter: FilterValuesType
 }
 
 export type TasksType = {
@@ -23,12 +24,14 @@ export type TasksType = {
 function TodoList(props: TodoListType) {
 
     let [newTasksTitle, setNewTasksTitle] = useState('')
+    let [error, setError] = useState<string | null>(null)
 
     const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTasksTitle(e.currentTarget.value)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (e.charCode === 13) {
             props.addTask(newTasksTitle)
             setNewTasksTitle('')
@@ -36,11 +39,13 @@ function TodoList(props: TodoListType) {
     }
 
     const addTask = () => {
-        if(newTasksTitle.trim() === ''){
-            return
+        if(newTasksTitle.trim() !== ''){
+            props.addTask(newTasksTitle.trim())
+            setNewTasksTitle('')
+        }else {
+            setError('Title is required')
         }
-        props.addTask(newTasksTitle.trim())
-        setNewTasksTitle('')
+
     }
 
     const onAllClickHandler = () => props.ChangeFilter('all')
@@ -89,9 +94,9 @@ function TodoList(props: TodoListType) {
 
                 </ul>
                 <div>
-                    <button onClick={onAllClickHandler}>All</button>
-                    <button onClick={onActiveClickHandler}>Active</button>
-                    <button onClick={onCompletedClickHandler}>Completed</button>
+                    <button className={props.filter === 'all' ? 'active-filter' : ''} onClick={onAllClickHandler}>All</button>
+                    <button className={props.filter === 'active' ? 'active-filter' : ''}onClick={onActiveClickHandler}>Active</button>
+                    <button className={props.filter === 'completed' ? 'active-filter' : ''}onClick={onCompletedClickHandler}>Completed</button>
                 </div>
             </div>
         </div>
