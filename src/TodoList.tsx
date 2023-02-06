@@ -8,6 +8,7 @@ export type TodoListType = {
     removeTask: (id: string) => void
     ChangeFilter: (value: FilterValuesType) => void
     addTask: (title: string) => void
+    changeStatus: (taskId: string, isDone: boolean) => void
 }
 
 export type TasksType = {
@@ -57,9 +58,16 @@ function TodoList(props: TodoListType) {
                 </div>
                 <ul>
                     {props.tasks.map((t) => {
+                        const onChangeHandler = () => {
+                            console.log(t.id + 'wts')
+                        }
                         return (
                             <li key={t.id}>
-                                <input type="checkbox" checked={t.isDone}/>
+                                <input type="checkbox"
+                                       onChange={onChangeHandler}
+                                       checked={t.isDone}
+
+                                />
                                 <span>{t.title}</span>
                                 <button onClick={(e) => {
                                     props.removeTask(t.id)
