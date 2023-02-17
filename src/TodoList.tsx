@@ -56,7 +56,7 @@ function TodoList(props: TodoListType) {
 
 
 
-    console.log('asda')
+
     return (
         <div>
             <h3>{props.title}</h3>
