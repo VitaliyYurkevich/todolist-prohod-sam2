@@ -27,7 +27,7 @@ function App() {
         if(task) {
             task.isDone = isDone
         }
-        console.log('asda')
+
         setTasks([...tasks])
     }
     const ChangeFilter = (value: FilterValuesType) => {
@@ -37,7 +37,7 @@ function App() {
         let filterT = tasks.filter(t => t.id !== id)
         setTasks(filterT)
     }
-console.log('asda')
+
     let FilteredTasks = tasks
     if (filter === 'active') {
         FilteredTasks = tasks.filter(t => t.isDone === false)
