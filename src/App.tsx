@@ -27,7 +27,7 @@ function App() {
         if(task) {
             task.isDone = isDone
         }
-
+        console.log('asda')
         setTasks([...tasks])
     }
     const ChangeFilter = (value: FilterValuesType) => {
