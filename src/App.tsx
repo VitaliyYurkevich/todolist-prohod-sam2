@@ -46,7 +46,7 @@ function App() {
         FilteredTasks = tasks.filter(t => t.isDone === true)
     }
 
-
+    console.log('sa')
     return (
         <div className="App">
             <TodoList title={'WTF'}
