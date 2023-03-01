@@ -54,7 +54,7 @@ function TodoList(props: TodoListType) {
 
     const onActiveClickHandler = () => props.ChangeFilter('active')
 
-    console.log("sasd")
+
     console.log('sa')
 
     return (
